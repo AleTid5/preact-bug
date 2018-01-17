@@ -496,6 +496,17 @@ describe('render()', () => {
 		expect(scratch.firstChild.lastChild).to.equal(a);
 	});
 
+	it('should not merge attributes with node created by the DOM', () => {
+		const div = document.createElement('div');
+		div.innerHTML = '<div><a foo="bar"></a></div>';
+
+		const DOMElement = div.firstChild;
+		const preactElement = <div><a></a></div>;
+
+		render(preactElement, scratch, DOMElement);
+		expect(scratch).to.have.property('innerHTML', '<div><a></a></div>');
+	});
+
 	it('should skip non-preact elements', () => {
 		class Foo extends Component {
 			render() {
