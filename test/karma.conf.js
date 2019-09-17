@@ -144,7 +144,7 @@ module.exports = function(config) {
 					coverage: coverage,
 					NODE_ENV: JSON.stringify(process.env.NODE_ENV || ''),
 					ENABLE_PERFORMANCE: performance,
-					DISABLE_FLAKEY: !!String(process.env.FLAKEY).match(/^(0|false)$/gi)
+					DISABLE_FLAKEY: !String(process.env.FLAKEY).match(/^(1|true)$/gi)
 				})
 			]
 		},
