@@ -57,7 +57,18 @@ var travisLaunchers = {
 	}
 };
 
-var localBrowsers = realBrowser ? Object.keys(travisLaunchers) : ['Chrome'];
+var localLaunchers = {
+	chrome_remote_debugging: {
+		base: 'Chrome',
+		flags: [
+			"--remote-debugging-address=0.0.0.0",
+			"--remote-debugging-port=9222"
+		],
+		debug: true
+	}
+};
+
+var localBrowsers = realBrowser ? Object.keys(travisLaunchers) : Object.keys(localLaunchers);
 
 module.exports = function(config) {
 	config.set({
@@ -96,7 +107,7 @@ module.exports = function(config) {
 		// 	startConnect: false
 		// },
 
-		customLaunchers: sauceLabs ? sauceLabsLaunchers : travisLaunchers,
+		customLaunchers: sauceLabs ? sauceLabsLaunchers : realBrowser ? travisLaunchers: localLaunchers,
 
 		files: [
 			{ pattern: 'polyfills.js', watched: false },
