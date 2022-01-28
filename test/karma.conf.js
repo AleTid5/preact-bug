@@ -70,6 +70,7 @@ var localLaunchers = {
 
 var localBrowsers = realBrowser ? Object.keys(travisLaunchers) : Object.keys(localLaunchers);
 // var localBrowsers = ['PhantomJS'];
+// var localBrowsers = ['Firefox'];
 
 module.exports = function(config) {
 	config.set({
